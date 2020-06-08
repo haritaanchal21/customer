@@ -15,47 +15,24 @@ mongoose.connect("mongodb://localhost:27017/harryDB", {
 });
 
 const customerSchema = new mongoose.Schema({
+  customerId: Number,
   name: String,
-  age: Number
+  age: Number,
+  gender: String,
+  address: String
 });
 
 const Customer = mongoose.model("Customer", customerSchema);
 
-// const customer = new Customer({
-//   name: "harita",
-//   age: 8
-// });
-
-// customer.save();
 
 app.get("/Test", function(req, res) {
   Customer.find({}, function(err, customers){
-    res.send(
-      JSON.stringify(customers)
-  );
+     res.send({  express: customers });
   });
 
 });
 
-// app.get('*', (req,res) =>{
-//     res.sendFile(path.join(__dirname+'/client/public/index.html'));
-// });
 
-// app.post("/compose", function(req, res) {
-//   const post = new Post ({
-
-//    name: "harita",
-
-//    age: 4
-
-//  });
-//   post.save(function(err){
-//     if(!err){
-//       res.redirect("/");
-//     }
-//   });
-
-// });
 
 app.listen(3001, function() {
   console.log("Server started on port 3001");
